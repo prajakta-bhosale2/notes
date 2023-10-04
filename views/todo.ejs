@@ -1,37 +1,47 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
+<html> 
 
-<html>
+<head> 
+	<title>Note Keeper</title> 
+</head> 
 
-    <head>
-        <title>My shaandaar todolist</title>
-        <style>
-            a {
-                text-decoration: none;
-                color: black;
-            }
+<body> 
+	<h1>Note Keeper</h1> 
 
-        </style>
-    </head>
+	<div style="display: flex;"> 
 
-    <body>
-        <h1>Piyush Pankaj Arkule From GPIS Std IV to do list</h1>
-        <ul>
-            <% todolist.forEach(function(todo, index) { %>
-            <li>
-                <a href="/todo/delete/<%= index %>">✘</a>
-                <a href="/todo/<%= index %>">✎</a>
-                <%- todo %>
-            </li>
-            <% }); %>
-        </ul>
+		<% data.forEach(element=> { %> 
 
-        <form action="/todo/add/" method="post">
-            <p>
-                <label for="newtodo">What shoud I do?</label>
-                <input type="text" name="newtodo" id="newtodo" autofocus />
-                <input type="submit" value="Add" />
-            </p>
-        </form>
-    </body>
+			<form action="/update" method="post"> 
+				<input type="number" style="display: none;"
+					name="noteId" value="<%= element.noteId %>"> 
+				<textarea type="text" rows="6" cols="30"
+						placeholder="Type Here..." name="noteContent"
+					value="<%= element.noteContent %>"> 
+					<%= element.noteContent %></textarea> 
+				<br> 
+				<button type="submit">Update</button> 
+			</form> 
+
+			<form action="/delete" method="post"> 
+				<input type="number" style="display: none;"
+					name="noteId" value="<%= element.noteId %>"> 
+				<button type="submit"
+						style="margin: 0px 4px;">✕</button> 
+			</form> 
+			<% }) %> 
+	</div> 
+
+	<h1>Add Note</h1> 
+	<form action="/" method="post"> 
+		<input type="number" style="display: none;"
+			name="noteId"> 
+		<textarea type="text" rows="6" cols="30"
+				placeholder="Type Here..."
+				name="noteContent"></textarea> 
+		<br> 
+		<button type="submit">Add</button> 
+	</form> 
+</body> 
 
 </html>
