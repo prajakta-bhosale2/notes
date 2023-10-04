@@ -1,47 +1,33 @@
-<!DOCTYPE html> 
-<html> 
+ <head>
+        <title> My to dolist</title>
+        <style>
+            a {
+                text-decoration: none;
+                color: black;
+            }
 
-<head> 
-	<title>Note Keeper</title> 
-</head> 
+        </style>
+    </head>
 
-<body> 
-	<h1>Note Keeper</h1> 
+    <body>
+        <h1> notes app </h1>
+        <ul>
+            <% todolist.forEach(function(todo, index) { %>
+            <li>
+                <a href="/todo/delete/<%= index %>">✘</a>
+                <a href="/todo/<%= index %>">✎</a>
+                <%- todo %>
+            </li>
+            <% }); %>
+        </ul>
 
-	<div style="display: flex;"> 
-
-		<% data.forEach(element=> { %> 
-
-			<form action="/update" method="post"> 
-				<input type="number" style="display: none;"
-					name="noteId" value="<%= element.noteId %>"> 
-				<textarea type="text" rows="6" cols="30"
-						placeholder="Type Here..." name="noteContent"
-					value="<%= element.noteContent %>"> 
-					<%= element.noteContent %></textarea> 
-				<br> 
-				<button type="submit">Update</button> 
-			</form> 
-
-			<form action="/delete" method="post"> 
-				<input type="number" style="display: none;"
-					name="noteId" value="<%= element.noteId %>"> 
-				<button type="submit"
-						style="margin: 0px 4px;">✕</button> 
-			</form> 
-			<% }) %> 
-	</div> 
-
-	<h1>Add Note</h1> 
-	<form action="/" method="post"> 
-		<input type="number" style="display: none;"
-			name="noteId"> 
-		<textarea type="text" rows="6" cols="30"
-				placeholder="Type Here..."
-				name="noteContent"></textarea> 
-		<br> 
-		<button type="submit">Add</button> 
-	</form> 
-</body> 
+        <form action="/todo/add/" method="post">
+            <p>
+                <label for="newtodo">What shoud I do?</label>
+                <input type="text" name="newtodo" id="newtodo" autofocus />
+                <input type="submit" value="Add" />
+            </p>
+        </form>
+    </body>
 
 </html>
